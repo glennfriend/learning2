@@ -1,0 +1,40 @@
+<style>
+  code {
+    font-family: Hack, "Source Code Pro", Inconsolata, GulimChe, Tahoma, sans-serif;
+  }
+  textarea {
+    width:100%;
+    height:300px;
+  }
+  .coloring {
+    background-color:#ff9999;
+  }
+</style>
+<textarea>
+  <h3>title</h3>
+  <h4>description</h4>
+  <div class="content">
+    <ul>school
+      <li>english</li>
+      <li>math</li>
+      <li>science</li>
+      <li>sport</li>
+    </ul>
+  </div>
+</textarea>
+
+<h3>title</h3>
+<h4>description</h4>
+<div class="content">
+  <ul>school
+    <li id="first-class">english</li>
+    <li>math</li>
+    <li>science</li>
+    <li>sport</li>
+  </ul>
+</div>
+
+<h4>query by id</h4>
+<pre class="js-return"><code class="javascript">
+    document.querySelector('#first-class').className += ' coloring'
+</code></pre>

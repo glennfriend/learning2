@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "@popperjs/core": "./@popperjs/core.js",
+    "bootstrap": "./bootstrap.js",
+    "bootstrap/dist/css/bootstrap.min.css": "./bootstrap/dist/css/bootstrap.min.css",
+    "highlight.js": "./highlightjs.js",
+    "highlight.js/styles/github.css": "./highlightjs/styles/github.css"
+  }
+}
