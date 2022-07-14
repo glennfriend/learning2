@@ -1,0 +1,36 @@
+<h4>const 宣告常數</h4>
+<pre class="js-return"><code class="javascript">
+    const PI = 3.141593;
+</code></pre>
+
+<h4>let 宣告區域變數</h4>
+<pre class="js-return"><code class="javascript">
+    let i = 100;
+    for ( let i=0 ; i<3; i++ ) {
+        console.log(i);
+    }
+    console.log( '=> ' + i );
+</code></pre>
+
+<h4>Destructuring</h4>
+<pre class="js-return"><code class="javascript">
+    var arr = [1,2,3];
+    var [a, , b] = arr;
+    var {x} = {x:100, y:200};
+    console.log('a = ' + a);
+    console.log('b = ' + b);
+    console.log('x = ' + x);
+</code></pre>
+
+<h4>Fail-Soft Destructuring</h4>
+<pre class="js-return"><code class="javascript">
+    var list = [ 100, 200 ];
+    var [ a = 1, b = 2, c = 3, d ] = list;
+    console.log(a, b, c, d);
+</code></pre>
+
+<h4>Binary & Octal Literal</h4>
+<pre class="js-return"><code class="javascript">
+    console.log( 0b11110 )
+    console.log( 0o36 )
+</code></pre>

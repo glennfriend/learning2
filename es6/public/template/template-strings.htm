@@ -1,0 +1,21 @@
+<h4>Template Strings</h4>
+<pre class="js-return"><code class="javascript">
+    var name = 'ken';
+    var hp   = 20;
+    var template = `
+${name} HP = ${hp * 100}
+`;
+    console.log(template.trim());
+</code></pre>
+
+<h4></h4>
+<pre class="js-return"><code class="javascript">
+    function fn (strings, ...values) {
+        console.log( strings[0]     );  // "foo\n"
+        console.log( strings[1]     );  // "bar"
+        console.log( strings.raw[0] );  // "foo\\n"
+        console.log( strings.raw[1] );  // "bar"
+        console.log( values[0]      );  // 42
+    }
+    fn `foo\n${ 42 }bar`
+</code></pre>

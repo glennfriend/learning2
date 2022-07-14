@@ -1,0 +1,31 @@
+<h4>Arrow Function</h4>
+<pre class="js-return"><code class="javascript">
+    var nums = [1,2,3];
+
+    console.log(
+        nums.map( function(v) {
+            return v * 2;
+        })
+    );
+
+    console.log(
+        nums.map( (v) => v * 2)
+    );
+
+</code></pre>
+
+<h4>Default Parameter Values</h4>
+<pre class="js-return"><code class="javascript">
+    (function fn (x, y = 7, z = 42) {
+        console.log([x, y, z]);
+    })
+    (1);
+</code></pre>
+
+<h4>Rest Parameter</h4>
+<pre class="js-return"><code class="javascript">
+    (function fn (x, y, ...a) {
+        console.log(a);
+    })
+    (1, 2, "hello", true, 7);
+</code></pre>

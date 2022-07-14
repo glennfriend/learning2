@@ -1,0 +1,22 @@
+<h4>setTimeout</h4>
+<pre class="js-return"><code class="javascript">
+    setTimeout(function(){
+        console.log('touch 1')
+        setTimeout(function(){
+            console.log('touch 2')
+        }, 1000)
+    }, 1000)
+</code></pre>
+
+<h4>setTimeout use Promise</h4>
+<pre class="js-return"><code class="javascript">
+    var wait1000 = () => new Promise((resolve, reject) => {setTimeout(resolve, 1000)})
+    wait1000()
+        .then(function() {
+            console.log('touch 1')
+            return wait1000()
+        })
+        .then(function() {
+            console.log('touch 2')
+        });
+</code></pre>

@@ -1,0 +1,13 @@
+
+<h4>async</h4>
+<pre class="js-return"><code class="javascript">
+    async function chainAnimationsAsync(elem, animations) {
+        let ret = null;
+        try {
+            for(const anim of animations) {
+                ret = await anim(elem);
+            }
+        } catch(e) { /* ignore and keep going */ }
+        return ret;
+    }
+</code></pre>

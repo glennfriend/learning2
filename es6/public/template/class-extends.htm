@@ -1,0 +1,32 @@
+<h4>Class Extends</h4>
+<pre class="js-return"><code class="javascript">
+    class Person
+    {
+        constructor () {
+            this._name = null;
+        }
+        setName (name) {
+            this._name = name;
+            return this;
+        }
+        getName (name) {
+            return this._name;
+        }
+    }
+
+    class User extends Person
+    {
+        constructor () {
+            super();
+            this._age = 0;
+        }
+        show () {
+            console.log(`hello ${this.getName()}, age is ${this._age}`);
+        }
+    }
+
+    new User()
+        .setName('ken')
+        .show();
+
+</code></pre>

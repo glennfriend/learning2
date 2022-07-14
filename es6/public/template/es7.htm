@@ -1,0 +1,65 @@
+
+<h4>次方</h4>
+<pre class="js-return"><code class="javascript">
+    console.log(2**8);
+    let val = 2;
+    val **= 8
+    console.log(val);
+</code></pre>
+
+<h4>迭代器 Iterators + For..Of</h4>
+<pre class="js-return"><code class="javascript">
+    let fibonacci = {
+        [Symbol.iterator]() {
+            let i = 1;
+            return {
+                next() {
+                    i *= 2;
+                    return { done: false, value: i }
+                }
+            }
+        }
+    }
+
+    for (var n of fibonacci) {
+        if (n > 100) {
+            break;
+        }
+        console.log(n);
+    }
+</code></pre>
+
+<h4>迭代器 Iterators + Generators</h4>
+<pre class="js-return"><code class="javascript">
+    let fibonacci = {
+        [Symbol.iterator]: function*() {
+            var i = 1;
+            for(;;) {
+                i *=2;
+                yield i;
+            }
+        }
+    }
+
+    for (var n of fibonacci) {
+        if (n > 100) {
+            break;
+        }
+        console.log(n);
+    }
+</code></pre>
+
+<h4>Reflect API</h4>
+<pre class="js-return"><code class="javascript">
+    var O = {a: 1};
+    Object.defineProperty(O, 'b', {value: 2});
+    O[Symbol('c')] = 3;
+
+    Reflect.ownKeys(O); // ['a', 'b', Symbol(c)]
+
+    function C(a, b){
+        this.c = a + b;
+    }
+    var instance = Reflect.construct(C, [20, 22]);
+    instance.c; // 42
+</code></pre>

@@ -1,0 +1,49 @@
+<h4>Method Properties</h4>
+<pre class="js-return"><code class="javascript">
+    var obj = {
+        name: null,
+        setName (name) {
+            this.name = name;
+            return this;
+        },
+        getName (name) {
+            return this.name;
+        },
+        show () {
+            console.log(`hello ${this.getName()}`);
+        }
+    }
+    obj.setName('ken').show();
+</code></pre>
+
+<h4>Class Constructor</h4>
+<pre class="js-return"><code class="javascript">
+    class User {
+        constructor () {
+            this._name = null;
+            this._age  = 0;
+        }
+        setName (name) {
+            this._name = name;
+            return this;
+        }
+        getName (name) {
+            return this._name;
+        }
+        show () {
+            console.log(`hello ${this.getName()} age is ${this._age}`);
+        }
+    }
+    var user = new User;
+    user.setName('ken').show();
+</code></pre>
+
+<h4>Static Members</h4>
+<pre class="js-return"><code class="javascript">
+    class UserHelper {
+        static getName() {
+            return 'jony walker';
+        }
+    }
+    console.log( UserHelper.getName() );
+</code></pre>

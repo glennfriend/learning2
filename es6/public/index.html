@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>Example</title>
+    <script src="assets/babel-core/browser.js"></script>
+    <script src="assets/jquery/jquery.js"></script>
+    <script src="dist/console-convert.js"></script>
+
+    <link rel="stylesheet" href="dist/highlight.js/styles/ir_black.css">
+    <script src="dist/highlight.js/highlight.pack.js"></script>
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <script src="assets/bootstrap/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="dist/main.css" />
+    <script src="dist/main.js"></script>
+    <script>
+
+        $(function() {
+
+            consoleConvert.appendtoConsoleWrite = true;
+            consoleConvert.setId('board');
+
+            $.ajaxSetup ({
+                cache: false
+            });
+
+            var template = 'template/';
+            if (location.hostname == "htmlpreview.github.io") {
+                var template = 'https://raw.githubusercontent.com/glennfriend/learning2/main/es6/public/template/'
+            }
+
+            $(window).on('hashchange', function() {
+                load(location.hash, template);
+            });
+            load(location.hash, template);
+
+            everyLoadPage();
+
+        });
+    </script>
+  </head>
+  <body>
+
+    <section>
+        <div class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="index.htm">Home</a></li>
+                        <li class=""><a href="https://babeljs.io/repl/" target="_blank">Babel try</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="margin:20px;">
+        <div class="row">
+            <div class="col-md-2">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                    </div>
+                    <div class="list-group">
+                        <a class="list-group-item js-load" href="#basic"            >Basic</a>
+                        <a class="list-group-item js-load" href="#function-basic"   >Function</a>
+                        <a class="list-group-item js-load" href="#class-basic"      >Class</a>
+                        <a class="list-group-item js-load" href="#class-extends"    >Class Extends</a>
+                        <a class="list-group-item js-load" href="#template-strings" >Template Strings</a>
+                        <a class="list-group-item js-load" href="#promise"          >Promise</a>
+
+                        <a class="list-group-item js-load" href="#es7"              >ES7</a>
+                        <a class="list-group-item js-load" href="#es7-functions"    >ES7 functions</a>
+                        <a class="list-group-item js-load" href="#es7-async"        >ES7 async</a>
+                        <a class="list-group-item js-load" href="#test1"            >Test 1</a>
+                        <a class="list-group-item js-load" href="#custom"           >custom to test</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content" class="col-md-5">
+
+                <p>&nbsp;</p>
+
+            </div>
+            <p>
+                <input type="button" value="clear" onclick="$('#board').text('');" />
+            </p>
+            <pre id="board" class="col-md-5"></pre>
+        </div>
+    </section>
+
+  </body>
+</html>
