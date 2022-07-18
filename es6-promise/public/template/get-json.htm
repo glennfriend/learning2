@@ -1,0 +1,63 @@
+
+<h4>get success</h4>
+<pre class="js-return"><code class="javascript">
+    var promise = new Promise(function(resolve, reject){
+        $.ajax({
+            url: 'json/result-success.json',
+            dataType: 'json',
+            cache: false,
+            success: resolve,
+            error: reject
+        });
+    });
+
+    promise
+    .then(function(value){
+        console.info(value);
+    })
+    .catch(function(error){
+        console.warn(error);
+    });
+</code></pre>
+
+<h4>get fail</h4>
+<pre class="js-return"><code class="javascript">
+    var promise = new Promise(function(resolve, reject){
+        $.ajax({
+            url: 'json/result-fail.json',
+            dataType: 'json',
+            cache: false,
+            success: resolve,
+            error: reject
+        });
+    });
+
+    promise
+    .then(function(value){
+        console.info(value);
+    })
+    .catch(function(error){
+        console.warn(error);
+    });
+</code></pre>
+
+<h4>URL error</h4>
+<pre class="js-return"><code class="javascript">
+    var promise = new Promise(function(resolve, reject){
+        $.ajax({
+            url: 'json/result-parse-error.json',
+            dataType: 'json',
+            cache: false,
+            success: resolve,
+            error: reject
+        });
+    });
+
+    promise
+    .then(function(value){
+        console.info(value);
+    })
+    .catch(function(error){
+        console.warn(error);
+    });
+</code></pre>

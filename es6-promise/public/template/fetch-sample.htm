@@ -1,0 +1,25 @@
+
+<h4>succes flow</h4>
+<pre class="js-return"><code class="javascript">
+
+    fetch('json/result-success.json')
+    .then(function(response) {
+        console.log(response);
+        return response.json();
+    })
+    .then(function(value) {
+        console.log(value);
+        value.hello = 'hello world';
+        return value;
+    })
+    .then(function(value) {
+        console.log(value);
+        return value;
+    })
+    .catch(function(error) {
+        console.error(error);
+    });
+
+</code></pre>
+
+

@@ -1,0 +1,18 @@
+<h4>get today</h4>
+<pre class="js-return"><code class="javascript">
+
+    console.log( new Date() );
+
+</code></pre>
+
+
+
+
+<h4>get tomorrow</h4>
+<pre class="js-return"><code class="javascript">
+
+    var oneDay = 1 * 86400 * 1000;
+    var tomorrow = new Date(new Date().getTime()+oneDay);
+    console.log( new Date(tomorrow) );
+
+</code></pre>

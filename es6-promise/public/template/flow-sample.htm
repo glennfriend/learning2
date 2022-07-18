@@ -1,0 +1,52 @@
+
+<h4>succes flow</h4>
+<pre class="js-return"><code class="javascript">
+    function taskA() {
+        console.info("---- start ----");
+        console.info("Task A");
+    }
+    function taskB() {
+        console.info("Task B");
+    }
+    function onRejected(error) {
+        console.error("Catch Error: A or B", error);
+    }
+    function finalTask() {
+        console.info("Final Task");
+    }
+
+    Promise
+        .resolve()
+        .then(taskA)
+        .then(taskB)
+        .catch(onRejected)
+        .then(finalTask);
+
+</code></pre>
+
+<h4>fail flow</h4>
+<pre class="js-return"><code class="javascript">
+    function taskA() {
+        console.info("---- start ----");
+        console.info("Task A");
+        throw new Error("throw Error @ Task A")
+    }
+    function taskB() {
+        console.info("Task B");
+    }
+    function onRejected(error) {
+        console.error("Catch Error: A or B", error);
+    }
+    function finalTask() {
+        console.info("Final Task");
+    }
+
+    Promise
+        .resolve()
+        .then(taskA)
+        .then(taskB)
+        .catch(onRejected)
+        .then(finalTask);
+
+</code></pre>
+

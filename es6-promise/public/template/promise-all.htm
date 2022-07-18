@@ -1,0 +1,27 @@
+
+<h4>所有請求完成才會呼叫 .than </h4>
+<pre class="js-return"><code class="javascript">
+
+    // delay 毫秒後執行 resolve
+    function timerPromisefy(delay) {
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve(delay);
+                // console.info('run ' + delay);
+            }, delay);
+        });
+    }
+
+    var startDate = Date.now();
+    // 所有 promise 變為 resolve 後呼叫 .than
+    Promise.all([
+        timerPromisefy(1),
+        timerPromisefy(32),
+        timerPromisefy(64),
+        timerPromisefy(1024)
+    ]).then(function (values) {
+        console.log(Date.now() - startDate + 'ms');
+        console.log(values);    // [1,32,64,128]
+    });
+
+</code></pre>

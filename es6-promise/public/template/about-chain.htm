@@ -1,0 +1,42 @@
+
+<h2>每次調用 then 都會返回一個 新建的 promise object</h2>
+<p>
+    &nbsp;
+</p>
+
+<h4>Promise Chain 總是將資料傳遞下去</h4>
+<pre class="js-return"><code class="javascript">
+
+    var promise = new Promise(function (resolve) {
+        resolve(100);
+    });
+    promise.then(function (value) {
+        return value * 2;   // 200
+    })
+    .then(function (value) {
+        return value * 2;   // 400
+    })
+    .then(function (value) {
+        console.log(value);
+    });
+
+</code></pre>
+
+<h4>不使用 Chain 會使得參數無法被傳遞, 請 "不要" 使用該方式!</h4>
+<pre class="js-return"><code class="javascript">
+
+    var promise = new Promise(function (resolve) {
+        resolve(100);
+    });
+    promise.then(function (value) {
+        return value * 2;   // 200
+    });
+    promise.then(function (value) {
+        return value * 2;   // 200
+    });
+    promise.then(function (value) {
+        console.log(value); // 100
+    })
+
+</code></pre>
+

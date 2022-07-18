@@ -1,0 +1,29 @@
+
+<h4>請使用 reject 代替 throw</h4>
+<pre class="js-return"><code class="javascript">
+
+    var promise = new Promise(function(resolve, reject){
+        reject(new Error("has error"));
+    });
+
+    promise
+    .catch(function(error){
+        console.error(error);
+    })
+
+</code></pre>
+
+<h4>不要使用 throw 的方式</h4>
+<pre class="js-return"><code class="javascript">
+
+    var promise = new Promise(function(resolve, reject){
+        throw new Error("has error");
+    });
+
+    promise
+    .catch(function(error){
+        console.error(error);
+    });
+
+</code></pre>
+

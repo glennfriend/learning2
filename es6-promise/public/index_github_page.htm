@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>Example</title>
+    <script src="assets/es6-promise/es6-promise.js"></script>
+    <script src="assets/fetch-polyfill/fetch.js"></script>
+    <script src="assets/jquery/jquery.js"></script>
+    <script src="dist/console-convert.js"></script>
+
+    <link rel="stylesheet" href="dist/highlight.js/styles/ir_black.css">
+    <script src="dist/highlight.js/highlight.pack.js"></script>
+
+    <script src="assets/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <script>
+        "use strict";
+
+        function init()
+        {
+            // clean all pre code "\n" and space
+            $(".js-return code").each(function(){
+                var text = $(this).text();
+                $(this).text(
+                    collocateSourceCode(text)
+                );
+            });
+
+            // render
+            // 先保留 source code, 免得上色後被污染, 就無法使用了
+            $(".js-return").each(function(){
+                var sourceCode = $(this).children("code").text();
+                $(this).append('<p></p>');
+                $(this).append('<input style="float:right" type="button" class="js_button" value="return" />');
+                $(this).children('.js_button').on('click', function(){
+                    var run = new Function(sourceCode);
+                    run();
+                });
+            });
+
+            // 程式碼上色
+            $('.js-return code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
+
+        }
+
+        function collocateSourceCode(text)
+        {
+            var items = text.trim().split("\n");
+            var result = [];
+            for ( var i in items ) {
+                var item = items[i];
+                if ("    "===item.substr(0,4)) {
+                    item = item.substr(4);
+                }
+                result.push(item);
+            }
+            return result.join("\n");
+        }
+
+        $(function() {
+
+            consoleConvert.appendtoConsoleWrite = true;
+            consoleConvert.setId('board');
+
+            $.ajaxSetup ({
+                cache: false
+            });
+
+            // load template
+            $(".js-load").on('click', function(){
+                var that = this;
+                var template = $(this).attr('title');
+              //var file = 'template/' + template + ".htm";
+                var file = 'https://raw.githubusercontent.com/glennfriend/learning/master/es6-promise/public/template/' + template + ".htm";
+                $('#content').load(file, function(response, status, xhr){
+                    if (status=2000) {
+                        $(".js-load").removeClass("active");
+                        $(that).addClass("active");
+                        init();
+                    }
+                });
+            });
+
+            init();
+
+        });
+    </script>
+  </head>
+  <body>
+
+    <section>
+        <div class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="margin:20px;">
+        <div class="row">
+            <div class="col-md-2">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                    </div>
+                    <div class="list-group">
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="basic">Basic</a>
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="get-json">Get URL</a>
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="syntactic-sugar">Syntactic Sugar</a>
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="about-chain">About Chain</a>
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="flow-sample">A Flow Sample</a>
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="reject-or-throw">Reject or Throw</a>
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="thenable">Thenable</a>
+
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="promise-all">Promise.all</a>
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="promise-race">Promise.race</a>
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="fetch-sample">Fetch Sample</a>
+                        <a href="javascript:void(0);" class="list-group-item js-load" title="just-test">Just test only</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content" class="col-md-5">
+
+                <ul>
+                    <li>使用 Promise 規範
+                        <ol>
+                            <li>總是使用 Promise Chain</li>
+                            <li>使用 reject 而不是 throw</li>
+                        </ol>
+                    </li>
+                    <li>Promise
+                        <ul>
+                            <li><a target="_blank" href="http://caniuse.com/promises/embed">Promise Support</a></li>
+                            <li><a target="_blank" href="http://liubin.github.io/promises-book/">JavaScript Promise迷你书（中文版）</a></li>
+                            <li><a target="_blank" href="https://www.npmjs.com/package/es6-promise">npm es6-promise</a></li>
+                        </ul>
+                    </li>
+                    <li>延伸閱讀
+                        <ul>
+                            <li><a target="_blank" href="http://caniuse.com/fetch/embed">Fetch Support</a></li>
+                            <li><a target="_blank" href="https://www.google.com.tw/#q=fetch+es6-promise">google fetch & es6-promise</a></li>
+                            <li><a target="_blank" href="http://www.html5rocks.com/en/tutorials/es6/promises/">Promises arrive in JavaScript</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p>&nbsp;</p>
+
+            </div>
+            <p>
+                <input type="button" value="clear" onclick="$('#board').text('');" />
+            </p>
+            <pre id="board" class="col-md-5"></pre>
+        </div>
+    </section>
+
+  </body>
+</html>

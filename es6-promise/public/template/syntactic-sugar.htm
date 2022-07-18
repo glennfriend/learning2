@@ -1,0 +1,20 @@
+
+<h4>resolve 基本型</h4>
+<pre class="js-return"><code class="javascript">
+    var promise = new Promise(function(resolve, reject){
+        resolve(200);
+    });
+
+    promise
+    .then(function(value){
+        console.info(value);
+    })
+</code></pre>
+
+<h4>resolve 語法糖衣</h4>
+<pre class="js-return"><code class="javascript">
+    Promise.resolve(200)
+    .then(function(value){
+        console.info(value);
+    })
+</code></pre>

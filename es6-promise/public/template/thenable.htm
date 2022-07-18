@@ -1,0 +1,13 @@
+<h4>jQuery ajax() 可以轉化為 Promise</h4>
+<pre class="js-return"><code class="javascript">
+
+    //
+    // jQuery ajax() 的返回值為 jqXHR Object, 該 object 具有 .then 方法
+    //
+    var $url = $.ajax('json/result-success.json');
+    var promise = Promise.resolve($url);
+    promise.then(function(value){
+       console.info(value);
+    });
+
+</code></pre>
