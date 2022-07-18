@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="zh-tw" />
+    <link rel="stylesheet" type="text/css" href="src/bootstrap-3.2.0-dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="src/main.css" />
+    <script type="text/javascript" charset="utf-8" src="src/jquery/jquery-2.1.1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/mustache/mustache.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/main.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        "use strict";
+
+        var model = {
+            setAll: function(data) {
+                this.sku        = data.sku;
+                this.name       = data.name;
+                this.image      = data.image;
+                this.url        = data.url;
+                this.products   = data.products;
+                this.price      = data.price;
+            },
+            //
+            // example:
+            //      {{#backgroundColor}}{{color}}{{/backgroundColor}}
+            //
+            backgroundColor: function() {
+                return function(text, render) {
+                    return 'background-color: #'+text;
+                    return "<b>" + render(text) + "</b>"
+                }
+            }
+        };
+
+        var data = [
+            {
+                'sku': '00001',
+                'name': 'Doris Gown',
+                'image': 'media/images/85109/85109_Black.jpg',
+                'url': 'product.html#black',
+                'products': [
+                    {'color':'000000', 'url':'product.html#black', 'image':'media/images/85109/85109_Black.jpg'},
+                    {'color':'ffffff', 'url':'product.html#white', 'image':'media/images/85109/85109_White.jpg'}
+                ],
+                'price': '$19.95'
+            },
+            {
+                'sku': '00002',
+                'name': 'Nell Gown',
+                'image': 'media/images/85042/85042_Chocolate.jpg',
+                'url': '#',
+                'products': [
+                    {'color':'4c2b18', 'url':'#', 'image':'media/images/85042/85042_Chocolate.jpg'},
+                    {'color':'fe8b70', 'url':'#', 'image':'media/images/85042/85042_DeepCoral.jpg'}
+                ],
+                'price': '$19.95'
+            },
+            {
+                'sku': '00003',
+                'name': 'other',
+                'url': '#',
+                'image': 'media/empty.jpg',
+                'products': [
+                    {'color':'3d274e', 'url':'#', 'image':'media/empty.jpg'},
+                    {'color':'533420', 'url':'#', 'image':'media/empty.jpg'},
+                    {'color':'643f24', 'url':'#', 'image':'media/empty.jpg'},
+                    {'color':'746c1b', 'url':'#', 'image':'media/empty.jpg'},
+                    {'color':'f2d6ce', 'url':'#', 'image':'media/empty.jpg'},
+                    {'color':'fbdca4', 'url':'#', 'image':'media/empty.jpg'},
+                    {'color':'fc8368', 'url':'#', 'image':'media/empty.jpg'},
+                    {'color':'bfafa0', 'url':'#', 'image':'media/empty.jpg'},
+                    {'color':'d0316b', 'url':'#', 'image':'media/empty.jpg'}
+                ],
+                'price': '$20.00'
+            },
+            {
+                'sku': '00004',
+                'name': 'other',
+                'url': '#',
+                'image': 'media/empty.jpg',
+                'products': [
+                    {'color':'abcdef', 'url':'#', 'image':'media/empty.jpg'}
+                ],
+                'price': '$20.00'
+            }
+        ];
+
+        $(function() {
+            //
+            var html = '';
+            for ( var index in data ) {
+                model.setAll( data[index] );
+                var template = jQuery("#product_template").html();
+                html += Mustache.render( template, model );
+            }
+            $("#display").html( html );
+        });
+
+    </script>
+</head>
+<body>
+
+    <div class="load" rel="template_header"></div>
+
+    <div class="container">
+        <div class="row" id="display"></div>
+    </div>
+
+    <!-- 顯示 乙組 產品區塊的內容 -->
+    <script type="text/html" id="product_template">
+
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <a href="{{url}}">
+                    <img src="{{image}}" alt="{{name}}" />
+                </a>
+                <div class="caption">
+                    <h3>{{name}}</h3>
+                    {{#products}}
+                        <div class="color-box" style="background-color: #{{color}}" 
+                            onclick=" $(this).parent().parent().find('img').attr('src','{{image}}');
+                                      $(this).parent().parent().find('a').attr('href','{{url}}'); "
+                        ></div>
+                    {{/products}}
+                    <br style="clear: both" />
+                    <p>{{price}}</p>
+                </div>
+            </div>
+        </div>
+    </script>
+
+</body>
+</html>

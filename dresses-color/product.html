@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="zh-tw" />
+    <link rel="stylesheet" type="text/css" href="src/bootstrap-3.2.0-dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="src/main.css" />
+    <style type="text/css">
+        #main-photo {
+            width: 260px;
+        }
+        .thumbnail-image {
+            width: 40px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8" src="src/jquery/jquery-2.1.1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/mustache/mustache.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/main.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        "use strict";
+
+        var model = {
+            setAll: function(data) {
+                this.sku        = data.sku;
+                this.name       = data.name;
+                this.image      = data.image;
+                this.groupData  = data.groupData;
+                this.price      = data.price;
+            },
+            setGroupKey: function( groupKey ) {
+                this.group = {};
+                for( var index in this.groupData ) {
+                    var obj = this.groupData[index];
+                    if ( obj.name === groupKey ) {
+                        this.group.name  = obj.name;
+                        this.group.url   = obj.url;
+                        this.group.color = obj.color;
+                        this.group.data  = obj.data;
+                        this.group.name  = obj.name;
+                        
+                        this.image = obj.data[0].image;
+                        break;
+                    }
+                }
+            }
+        };
+
+        var allData = {
+            'sku': '00001',
+            'name': 'Doris Gown',
+            'image': '', // factory
+            'price': '$19.95',
+            'groupData': [
+                {
+                    'name':'black',
+                    'url':'#black',
+                    'color':'000000',
+                    'data':[
+                        {'color':'000000', 'image':'media/images/85109/85109_Black.jpg'},
+                        {'color':'3d274e', 'image':'media/images/85109/85109_Blueiris.jpg'},
+                        {'color':'533420', 'image':'media/images/85109/85109_Chocolate.jpg'},
+                        {'color':'746c1b', 'image':'media/images/85109/85109_Olive.jpg'}
+                    ]
+                },
+                {
+                    'name':'white',
+                    'url':'#white',
+                    'color':'ffffff',
+                    'data':[
+                        {'color':'ffffff', 'image':'media/images/85109/85109_White.jpg'},
+                        {'color':'f2d6ce', 'image':'media/images/85109/85109_Blush.jpg'},
+                        {'color':'fbdca4', 'image':'media/images/85109/85109_Buttercup.jpg'},
+                        {'color':'fc8368', 'image':'media/images/85109/85109_DeepCoral.jpg'},
+                        {'color':'bfafa0', 'image':'media/images/85109/85109_Emerald.jpg'},
+                        {'color':'d0316b', 'image':'media/images/85109/85109_Fuchsia.jpg'}
+                    ]
+                },
+            ]
+        };
+
+        model.setAll( allData );
+
+        $(function() {
+            var hash = location.hash.slice(1);
+            render(hash);
+        });
+
+        var render = function( hash )
+        {
+            var map = {
+                '': 'black',
+                'black': 'black',
+                'white': 'white'
+            };
+
+            if ( map[hash] ) {
+                model.setGroupKey( map[hash] );
+                var template = jQuery("#display_template").html();
+                var html = Mustache.render( template, model );
+                $("#display").html( html );
+            }
+            else {
+                $("#display").html( 'hello world' );
+            }
+
+        };
+
+        $(window).on('hashchange', function() {
+            var hash = location.hash.slice(1);
+            render(hash);
+        });
+
+    </script>
+</head>
+<body class="container">
+
+    <div class="load" rel="template_header"></div>
+
+    <div class="container">
+        <div id="display"></div>
+    </div>
+
+    <!-- 顯示 大圖、小圖、產品資訊 -->
+    <script type="text/html" id="display_template">
+        <div class="row">
+            <div class="col-md-3">
+                <img id="main-photo" src="{{image}}" />
+            </div>
+            <div class="col-md-9">
+                <h3>{{name}}</h3>
+                <p>Item ID:#{{sku}}</p>
+                <p>PROMO PRICE: {{price}}</p>
+                {{#groupData}}
+                    <a href="{{url}}">
+                        <div class="color-box" style="background-color: #{{color}}" title="{{name}}"></div>
+                    </a>
+                {{/groupData}}
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+            {{#group.data}}
+                <div style="float: left;">
+                    <img class="thumbnail-image" src="{{image}}" 
+                        onclick="$('#main-photo').attr('src','{{image}}');" />
+                </div>
+            {{/group.data}}
+            </div>
+        </div>
+    </script>
+
+</body>
+</html>
